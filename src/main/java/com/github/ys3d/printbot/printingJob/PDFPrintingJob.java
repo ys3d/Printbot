@@ -1,4 +1,4 @@
-package de.ohrhusten.printbot.printingJob;
+package com.github.ys3d.printbot.printingJob;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.printing.PDFPageable;
@@ -12,9 +12,10 @@ import java.io.InputStream;
 
 /**
  * Job for Printing PDFs
+ * @author Daniel Schild
  */
 public class PDFPrintingJob extends PrintingJob {
-    private final PDDocument document;
+    protected final PDDocument document;
 
     /**
      * Creates new {@link PDFPrintingJob}
@@ -59,6 +60,7 @@ public class PDFPrintingJob extends PrintingJob {
 
     @Override
     public void execute() throws PrinterException {
+        System.out.println("Printing PDF-Job");
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setPageable(new PDFPageable(document));
         job.setPrintService(super.service);
