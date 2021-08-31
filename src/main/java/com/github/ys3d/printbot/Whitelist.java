@@ -39,7 +39,7 @@ public class Whitelist {
     public Whitelist(InputStream stream) throws IOException {
         this.whitelist = new HashSet<>();
         String whitelistString = IOUtils.toString(stream, StandardCharsets.UTF_8);
-        this.whitelist.addAll(Arrays.asList(whitelistString.split("\r\n")));
+        this.whitelist.addAll(Arrays.asList(whitelistString.split("\\R")));
     }
 
     /**
