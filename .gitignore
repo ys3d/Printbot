@@ -299,5 +299,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,intellij,java,maven
 
 # Project Specific
-bot.properties
+src/main/resources/bot.properties
 src/main/resources/whitelist.txt
