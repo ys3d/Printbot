@@ -300,4 +300,4 @@ $RECYCLE.BIN/
 
 # Project Specific
 bot.properties
-whitelist.txt
+src/main/resources/whitelist.txt

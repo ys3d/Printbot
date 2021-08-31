@@ -19,11 +19,11 @@ abstract class PrintingJob {
     protected PrintingJob(String printerName) {
         this.service = findPrintService(printerName);
     }
+
     /**
      * Initializes a new PrintingJob.
      * @param service The service of the printer
      */
-
     protected PrintingJob(PrintService service) {
         this.service = service;
     }

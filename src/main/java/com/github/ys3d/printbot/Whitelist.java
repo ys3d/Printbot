@@ -1,13 +1,9 @@
 package com.github.ys3d.printbot;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -41,7 +37,7 @@ public class Whitelist {
      * @throws IOException If the given stream von not be read properly
      */
     public Whitelist(InputStream stream) throws IOException {
-        this.whitelist = new HashSet<String>();
+        this.whitelist = new HashSet<>();
         String whitelistString = IOUtils.toString(stream, StandardCharsets.UTF_8);
         this.whitelist.addAll(Arrays.asList(whitelistString.split("\r\n")));
     }

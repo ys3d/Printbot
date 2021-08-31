@@ -1,16 +1,13 @@
 package com.github.ys3d.printbot.printingJob;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import javax.print.*;
-import javax.print.attribute.Attribute;
-import javax.print.attribute.AttributeSet;
-import javax.print.attribute.PrintServiceAttribute;
-import javax.print.attribute.PrintServiceAttributeSet;
-import javax.print.event.PrintServiceAttributeListener;
 
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -25,6 +22,8 @@ import static org.mockito.Mockito.*;
  * @author Daniel Schild
  */
 public class PDFPrintingJobTest {
+    @Rule
+    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Test
     public void constructNamePath() throws IOException {
@@ -133,101 +132,6 @@ public class PDFPrintingJobTest {
         verify(mockPJob, times(1)).setPageable(any());
         verify(mockPJob, times(1)).setPrintService(job.service);
         verify(mockPJob, times(1)).print();
-    }
-
-
-    private static class TestPrintService implements PrintService {
-        private final String name;
-
-        private TestPrintService(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public DocPrintJob createPrintJob() {
-            return null;
-        }
-
-        @Override
-        public void addPrintServiceAttributeListener(PrintServiceAttributeListener listener) {
-        }
-
-        @Override
-        public void removePrintServiceAttributeListener(PrintServiceAttributeListener listener) {
-        }
-
-        @Override
-        public PrintServiceAttributeSet getAttributes() {
-            return null;
-        }
-
-        @Override
-        public <T extends PrintServiceAttribute> T getAttribute(Class<T> category) {
-            return null;
-        }
-
-        @Override
-        public DocFlavor[] getSupportedDocFlavors() {
-            return new DocFlavor[0];
-        }
-
-        @Override
-        public boolean isDocFlavorSupported(DocFlavor flavor) {
-            return false;
-        }
-
-        @Override
-        public Class<?>[] getSupportedAttributeCategories() {
-            return new Class[0];
-        }
-
-        @Override
-        public boolean isAttributeCategorySupported(Class<? extends Attribute> category) {
-            return false;
-        }
-
-        @Override
-        public Object getDefaultAttributeValue(Class<? extends Attribute> category) {
-            return null;
-        }
-
-        @Override
-        public Object getSupportedAttributeValues(Class<? extends Attribute> category, DocFlavor flavor, AttributeSet attributes) {
-            return null;
-        }
-
-        @Override
-        public boolean isAttributeValueSupported(Attribute attrval, DocFlavor flavor, AttributeSet attributes) {
-            return false;
-        }
-
-        @Override
-        public AttributeSet getUnsupportedAttributes(DocFlavor flavor, AttributeSet attributes) {
-            return null;
-        }
-
-        @Override
-        public ServiceUIFactory getServiceUIFactory() {
-            return null;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (!(obj instanceof PDFPrintingJobTest.TestPrintService)) {
-                return false;
-            }
-            PDFPrintingJobTest.TestPrintService ps = (PDFPrintingJobTest.TestPrintService) obj;
-            return this.name.equals(ps.getName());
-        }
-
-        @Override
-        public int hashCode() {
-            return 0;
-        }
+        assertEquals("Printing PDF-Job", systemOutRule.getLog().trim());
     }
 }
